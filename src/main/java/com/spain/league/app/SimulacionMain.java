@@ -1,15 +1,10 @@
 package com.spain.league.app;
 
 import com.spain.league.config.JpaUtil;
-import com.spain.league.dao.jpa.DeportistaDaoJpa;
-import com.spain.league.dao.jpa.EntrenadorDaoJpa;
-import com.spain.league.dao.jpa.EquipoDaoJpa;
-import com.spain.league.dao.jpa.LigaDaoJpa;
+import com.spain.league.dao.PatrocinadorDao;
+import com.spain.league.dao.jpa.*;
 import com.spain.league.modelo.Liga;
-import com.spain.league.servicio.DeportistaServicio;
-import com.spain.league.servicio.EntrenadorServicio;
-import com.spain.league.servicio.EquipoServicio;
-import com.spain.league.servicio.LigaServicio;
+import com.spain.league.servicio.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -40,6 +35,9 @@ public class SimulacionMain {
             EntrenadorServicio entrenadorServicio = new EntrenadorServicio(entrenadorDaoJpa);
             entrenadorServicio.crearEntrenadorDeDatos();
 
+            PatrocinadorDaoJpa patrocinadorDaoJpa = new PatrocinadorDaoJpa(em);
+            PatrocinadorServicio patrocinadorServicio = new PatrocinadorServicio(patrocinadorDaoJpa);
+            patrocinadorServicio.crearPatrocinadoresDesdeDatos();
 
             em.getTransaction().commit();
         } catch (Exception e) {
