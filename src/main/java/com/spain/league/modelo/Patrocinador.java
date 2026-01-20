@@ -1,7 +1,6 @@
 package com.spain.league.modelo;
 
 import jakarta.persistence.*;
-import jdk.jfr.Name;
 
 @Entity(name = "sponsor")
 public class Patrocinador {

@@ -15,12 +15,17 @@ public class Entrenador {
     @Column(name = "nationality")
     private String nacionalidad;
 
+    @OneToOne
+    @JoinColumn(name = "equipo_id")
+    private Equipo equipo;
+
     public Entrenador() {
     }
 
-    public Entrenador(String nombre, String nacionalidad) {
+    public Entrenador(String nombre, String nacionalidad,Equipo equipo) {
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;
+        this.equipo = equipo;
     }
 
     public Long getId() {
@@ -45,6 +50,14 @@ public class Entrenador {
 
     public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad;
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
     }
 
     @Override

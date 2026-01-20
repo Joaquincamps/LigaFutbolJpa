@@ -27,6 +27,16 @@ public class Equipo {
     @Column(name = "points")
     private int puntos;
 
+    @OneToOne(mappedBy = "equipo")
+    private Entrenador entrenador;
+
+    //metodo helper para asignar equipo al entrenador
+    public void asignarEntrenador(Entrenador entrenador){
+        this.entrenador = entrenador;
+        if (entrenador != null) {
+            entrenador.setEquipo(this);
+        }    }
+
     public Equipo() {
     }
 
@@ -93,6 +103,14 @@ public class Equipo {
 
     public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    public Entrenador getEntrenador() {
+        return entrenador;
+    }
+
+    public void setEntrenador(Entrenador entrenador) {
+        this.entrenador = entrenador;
     }
 
     @Override

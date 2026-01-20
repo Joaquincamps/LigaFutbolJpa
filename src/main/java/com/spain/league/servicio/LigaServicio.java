@@ -1,7 +1,11 @@
 package com.spain.league.servicio;
 
 import com.spain.league.dao.LigaDao;
+import com.spain.league.modelo.Entrenador;
+import com.spain.league.modelo.Equipo;
 import com.spain.league.modelo.Liga;
+
+import java.util.Set;
 
 public class LigaServicio {
 
@@ -16,14 +20,18 @@ public class LigaServicio {
         return categoria;
     }
 
-    private final LigaDao ligaDao;
+    private LigaDao ligaDao;
+
 
     public LigaServicio(LigaDao ligaDao) {
         this.ligaDao = ligaDao;
     }
 
+
     public void crearLigaDesdeDatos() {
         Liga liga = new Liga(nombreLiga, categoria);
         ligaDao.crearLiga(liga);
     }
+
+
 }
