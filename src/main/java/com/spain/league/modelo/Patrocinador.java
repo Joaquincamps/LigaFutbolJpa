@@ -1,9 +1,20 @@
 package com.spain.league.modelo;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import jdk.jfr.Name;
 
 @Entity(name = "sponsor")
 public class Patrocinador {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String hooa;
+
+    @Column(name = "name")
+    private String nombre;
+
+    @Column(name = "country")
+    private String pais;
+
+
 }
