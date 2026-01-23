@@ -35,8 +35,8 @@ public class Equipo {
     @OneToMany(mappedBy = "equipo",orphanRemoval = true,cascade = CascadeType.ALL)
     private Set<Deportista> deportistas;
 
-    @ManyToOne
-    private Patrocinador patrocinador;
+    @ManyToMany(mappedBy = "equipo")
+    private Set<Patrocinador> patrocinadores;
 
     //metoodos helpers
     public void agregarDeportista(Deportista deportista){
@@ -71,6 +71,7 @@ public class Equipo {
         this.golesEnContra = golesEnContra;
         this.puntos = puntos;
         this.deportistas = new HashSet<>();
+        this.patrocinadores = new HashSet<>();
     }
 
     public Long getId() {
@@ -145,12 +146,12 @@ public class Equipo {
         this.deportistas = deportistas;
     }
 
-    public Patrocinador getPatrocinador() {
-        return patrocinador;
+    public Set<Patrocinador> getPatrocinadores() {
+        return patrocinadores;
     }
 
-    public void setPatrocinador(Patrocinador patrocinador) {
-        this.patrocinador = patrocinador;
+    public void setPatrocinadores(Set<Patrocinador> patrocinadores) {
+        this.patrocinadores = patrocinadores;
     }
 
     @Override

@@ -2,6 +2,9 @@ package com.spain.league.modelo;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity(name = "sponsor")
 public class Patrocinador {
 
@@ -16,7 +19,10 @@ public class Patrocinador {
     private String pais;
 
     @ManyToMany
-    private Equipo equipo;
+    @JoinTable(name = "patrocinador_equipo",
+    joinColumns = @JoinColumn(name = "patrocinador_id"),
+    inverseJoinColumns = @JoinColumn(name = "equipo_id"))
+    private Set<Equipo> equipos;
 
     public Patrocinador() {
     }
@@ -24,6 +30,7 @@ public class Patrocinador {
     public Patrocinador(String nombre, String pais) {
         this.nombre = nombre;
         this.pais = pais;
+        this.equipos = new HashSet<>();
     }
 
     public Long getId() {
@@ -50,12 +57,12 @@ public class Patrocinador {
         this.pais = pais;
     }
 
-    public Equipo getEquipo() {
-        return equipo;
+    public Set<Equipo> getEquipos() {
+        return equipos;
     }
 
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
+    public void setEquipos(Set<Equipo> equipos) {
+        this.equipos = equipos;
     }
 
     @Override
