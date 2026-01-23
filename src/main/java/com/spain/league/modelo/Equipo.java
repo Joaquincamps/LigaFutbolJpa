@@ -1,6 +1,8 @@
 package com.spain.league.modelo;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "team")
 public class Equipo {
@@ -30,6 +32,27 @@ public class Equipo {
     @OneToOne(mappedBy = "equipo")
     private Entrenador entrenador;
 
+    @OneToMany(mappedBy = "equipo",orphanRemoval = true,cascade = CascadeType.ALL)
+    private Set<Deportista> deportistas;
+
+    @ManyToOne
+    private Patrocinador patrocinador;
+
+    //metoodos helpers
+    public void agregarDeportista(Deportista deportista){
+        if(deportista !=null){
+            deportistas.add(deportista);
+            deportista.setEquipo(this);
+        }
+    }
+
+    public void eliminarDeportista(Deportista deportista){
+        if(deportista != null){
+            deportistas.remove(deportista);
+            deportista.setEquipo(null);
+        }
+    }
+
     //metodo helper para asignar equipo al entrenador
     public void asignarEntrenador(Entrenador entrenador){
         this.entrenador = entrenador;
@@ -47,6 +70,7 @@ public class Equipo {
         this.golesAfavor = golesAfavor;
         this.golesEnContra = golesEnContra;
         this.puntos = puntos;
+        this.deportistas = new HashSet<>();
     }
 
     public Long getId() {
@@ -111,6 +135,22 @@ public class Equipo {
 
     public void setEntrenador(Entrenador entrenador) {
         this.entrenador = entrenador;
+    }
+
+    public Set<Deportista> getDeportistas() {
+        return deportistas;
+    }
+
+    public void setDeportistas(Set<Deportista> deportistas) {
+        this.deportistas = deportistas;
+    }
+
+    public Patrocinador getPatrocinador() {
+        return patrocinador;
+    }
+
+    public void setPatrocinador(Patrocinador patrocinador) {
+        this.patrocinador = patrocinador;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Entrenador {
     @Column(name = "nationality")
     private String nacionalidad;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "equipo_id")
     private Equipo equipo;
 

@@ -18,13 +18,18 @@ public class Deportista {
     @Column(name = "age")
     private int edad;
 
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "equipo_id")
+    private Equipo equipo;
+
     public Deportista() {
     }
 
-    public Deportista(String nombre, String nacionalidad, int edad) {
+    public Deportista(String nombre, String nacionalidad, int edad,Equipo equipo) {
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;
         this.edad = edad;
+        this.equipo = equipo;
     }
 
     public Long getId() {
@@ -57,6 +62,14 @@ public class Deportista {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
     }
 
     @Override

@@ -15,6 +15,9 @@ public class Patrocinador {
     @Column(name = "country")
     private String pais;
 
+    @ManyToMany
+    private Equipo equipo;
+
     public Patrocinador() {
     }
 
@@ -45,6 +48,14 @@ public class Patrocinador {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
     }
 
     @Override
