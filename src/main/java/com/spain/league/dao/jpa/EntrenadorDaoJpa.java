@@ -16,4 +16,8 @@ public class EntrenadorDaoJpa implements EntrenadorDao {
     public void agregarEntrenador(Entrenador entrenador) {
         em.persist(entrenador);
     }
+
+    public void metoodPruebba(){
+        System.out.println("Es un metodo de prueba");
+    }
 }
