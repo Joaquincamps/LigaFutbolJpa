@@ -29,14 +29,28 @@ public class Equipo {
     @Column(name = "points")
     private int puntos;
 
+    @ManyToOne()
+    private Liga liga;
+
     @OneToOne(mappedBy = "equipo")
     private Entrenador entrenador;
 
     @OneToMany(mappedBy = "equipo",orphanRemoval = true,cascade = CascadeType.ALL)
     private Set<Deportista> deportistas;
 
-    @ManyToMany(mappedBy = "equipo")
+    @ManyToMany(mappedBy = "equipos",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Patrocinador> patrocinadores;
+
+    //agregar patrocinador
+    public void agregarPatrocinador(Patrocinador patrocinador){
+        this.patrocinadores.add(patrocinador);
+        patrocinador.getEquipos().add(this);
+    }
+
+    public void eliminarPatrocinador(Patrocinador patrocinador){
+        this.patrocinadores.remove(patrocinador);
+        patrocinador.getEquipos().add(null);
+    }
 
     //metoodos helpers
     public void agregarDeportista(Deportista deportista){
@@ -152,6 +166,14 @@ public class Equipo {
 
     public void setPatrocinadores(Set<Patrocinador> patrocinadores) {
         this.patrocinadores = patrocinadores;
+    }
+
+    public Liga getLiga() {
+        return liga;
+    }
+
+    public void setLiga(Liga liga) {
+        this.liga = liga;
     }
 
     @Override

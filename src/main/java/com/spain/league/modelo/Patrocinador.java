@@ -24,6 +24,16 @@ public class Patrocinador {
     inverseJoinColumns = @JoinColumn(name = "equipo_id"))
     private Set<Equipo> equipos;
 
+    //metodo helper
+    public void agregarEquipo(Equipo equipo){
+        this.equipos.add(equipo);
+        equipo.getPatrocinadores().add(this);
+    }
+
+    public void eliminarEquipo(Equipo equipo){
+        this.equipos.remove(equipo);
+        equipo.getPatrocinadores().add(null);
+    }
     public Patrocinador() {
     }
 

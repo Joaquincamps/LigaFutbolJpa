@@ -2,6 +2,9 @@ package com.spain.league.modelo;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity(name = "League")
 public class Liga {
 
@@ -15,12 +18,16 @@ public class Liga {
     @Column(name = "category")
     private String categoria;
 
+    @OneToMany(mappedBy = "liga")
+    private Set<Equipo> equipos;
+
     public Liga() {
     }
 
     public Liga(String nombreLiga, String categoria) {
         this.nombreLiga = nombreLiga;
         this.categoria = categoria;
+        this.equipos = new HashSet<>();
     }
 
     public Long getId() {
@@ -45,6 +52,14 @@ public class Liga {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public Set<Equipo> getEquipos() {
+        return equipos;
+    }
+
+    public void setEquipos(Set<Equipo> equipos) {
+        this.equipos = equipos;
     }
 
     @Override

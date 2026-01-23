@@ -5,13 +5,14 @@ import com.spain.league.dao.LigaDao;
 import com.spain.league.dao.jpa.DeportistaDaoJpa;
 import com.spain.league.dao.jpa.EntrenadorDaoJpa;
 import com.spain.league.dao.jpa.EquipoDaoJpa;
-import com.spain.league.modelo.Deportista;
-import com.spain.league.modelo.Entrenador;
-import com.spain.league.modelo.Equipo;
-import com.spain.league.modelo.Liga;
+import com.spain.league.dao.jpa.PatrocinadorDaoJpa;
+import com.spain.league.modelo.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 public class LigaServicio {
@@ -20,7 +21,6 @@ public class LigaServicio {
     private static String categoria = "Primera División";
     private EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
     private EntityManager em =emf.createEntityManager();
-    private DeportistaDaoJpa deportistaDaoJpa = new DeportistaDaoJpa(em);
 
     public static String getNombreLiga() {
         return nombreLiga;
@@ -43,12 +43,15 @@ public class LigaServicio {
         ligaDao.crearLiga(liga);
     }
 
-    public void crearEquipoConEntrenador(){
+    public void crearEquipoConEntrenador() {
         em.getTransaction().begin();
         EquipoDaoJpa equipoDaoJpa = new EquipoDaoJpa(em);
         EntrenadorDaoJpa entrenadorDaoJpa = new EntrenadorDaoJpa(em);
-        Entrenador t1 = new Entrenador("Hansi Flick", "Alemana",null);          // FC Barcelona
-        Entrenador t2 = new Entrenador("Carlo Ancelotti", "Italiana",null);     // Real Madrid
+        DeportistaDaoJpa deportistaDaoJpa = new DeportistaDaoJpa(em);
+        PatrocinadorDaoJpa patrocinadorDaoJpa = new PatrocinadorDaoJpa(em);
+
+        Entrenador t1 = new Entrenador("Hansi Flick", "Alemana", null);          // FC Barcelona
+        Entrenador t2 = new Entrenador("Carlo Ancelotti", "Italiana", null);     // Real Madrid
         Entrenador t3 = new Entrenador("Marcelino García Toral", "Española", null);
         Entrenador t4 = new Entrenador("Diego Simeone", "Argentina", null);
         Entrenador t5 = new Entrenador("Manolo González", "Española", null);
@@ -90,16 +93,16 @@ public class LigaServicio {
         entrenadorDaoJpa.agregarEntrenador(t9);
         entrenadorDaoJpa.agregarEntrenador(t10);
 
-        Deportista d1  = new Deportista("Marc-André ter Stegen", "Alemana", 33, null);
-        Deportista d2  = new Deportista("Joan García", "Española", 24, null);
-        Deportista d3  = new Deportista("Alejandro Balde", "Española", 22, null);
-        Deportista d4  = new Deportista("Ronald Araújo", "Uruguaya", 26, null);
-        Deportista d5  = new Deportista("Pau Cubarsí", "Española", 18, null);
-        Deportista d6  = new Deportista("Ferran Torres", "Española", 25, null);
-        Deportista d7  = new Deportista("Robert Lewandowski", "Polaca", 37, null);
-        Deportista d8  = new Deportista("Lamine Yamal", "Española", 18, null);
+        Deportista d1 = new Deportista("Marc-André ter Stegen", "Alemana", 33, null);
+        Deportista d2 = new Deportista("Joan García", "Española", 24, null);
+        Deportista d3 = new Deportista("Alejandro Balde", "Española", 22, null);
+        Deportista d4 = new Deportista("Ronald Araújo", "Uruguaya", 26, null);
+        Deportista d5 = new Deportista("Pau Cubarsí", "Española", 18, null);
+        Deportista d6 = new Deportista("Ferran Torres", "Española", 25, null);
+        Deportista d7 = new Deportista("Robert Lewandowski", "Polaca", 37, null);
+        Deportista d8 = new Deportista("Lamine Yamal", "Española", 18, null);
 
-        Deportista d9  = new Deportista("Thibaut Courtois", "Belga", 33, null);
+        Deportista d9 = new Deportista("Thibaut Courtois", "Belga", 33, null);
         Deportista d10 = new Deportista("Andriy Lunin", "Ucraniana", 26, null);
         Deportista d11 = new Deportista("Fran González", "Española", 20, null);
         Deportista d12 = new Deportista("Dean Huijsen", "Neerlandesa", 20, null);
@@ -368,12 +371,76 @@ public class LigaServicio {
         deportistaDaoJpa.crearDeportista(d78);
         deportistaDaoJpa.crearDeportista(d79);
         deportistaDaoJpa.crearDeportista(d80);
+
+
+        //PATROCINADORES
+        Patrocinador p1 = new Patrocinador("Spotify", "Suecia");
+        Patrocinador p2 = new Patrocinador("Fly Emirates", "Emiratos Árabes Unidos");
+        Patrocinador p3 = new Patrocinador("Plus500", "Israel");
+        Patrocinador p4 = new Patrocinador("Kutxabank", "España");
+        Patrocinador p5 = new Patrocinador("Cazoo", "Reino Unido");
+        Patrocinador p6 = new Patrocinador("Rakuten", "Japón");
+        Patrocinador p7 = new Patrocinador("Sorare", "Francia");
+        Patrocinador p8 = new Patrocinador("Estrella Galicia", "España");
+        Patrocinador p9 = new Patrocinador("Mahou", "España");
+        Patrocinador p10 = new Patrocinador("WhaleFin", "Singapur");
+        Patrocinador p11 = new Patrocinador("Adidas", "Alemania");
+        Patrocinador p12 = new Patrocinador("Puma", "Alemania");
+        Patrocinador p13 = new Patrocinador("Qatar Airways", "Qatar");
+        Patrocinador p14 = new Patrocinador("Coca-Cola", "Estados Unidos");
+        Patrocinador p15 = new Patrocinador("Heineken", "Países Bajos");
+        Patrocinador p16 = new Patrocinador("Toyota", "Japón");
+        Patrocinador p17 = new Patrocinador("Samsung", "Corea del Sur");
+        Patrocinador p18 = new Patrocinador("Vivo", "China");
+        Patrocinador p19 = new Patrocinador("Red Bull", "Austria");
+        Patrocinador p20 = new Patrocinador("Pepsi", "Estados Unidos");
+
+        p1.agregarEquipo(e1);
+
+        patrocinadorDaoJpa.guardarPatrocinador(p1);
+        patrocinadorDaoJpa.guardarPatrocinador(p2);
+        patrocinadorDaoJpa.guardarPatrocinador(p3);
+        patrocinadorDaoJpa.guardarPatrocinador(p4);
+        patrocinadorDaoJpa.guardarPatrocinador(p5);
+        patrocinadorDaoJpa.guardarPatrocinador(p6);
+        patrocinadorDaoJpa.guardarPatrocinador(p7);
+        patrocinadorDaoJpa.guardarPatrocinador(p8);
+        patrocinadorDaoJpa.guardarPatrocinador(p9);
+        patrocinadorDaoJpa.guardarPatrocinador(p10);
+        patrocinadorDaoJpa.guardarPatrocinador(p11);
+        patrocinadorDaoJpa.guardarPatrocinador(p12);
+        patrocinadorDaoJpa.guardarPatrocinador(p13);
+        patrocinadorDaoJpa.guardarPatrocinador(p14);
+        patrocinadorDaoJpa.guardarPatrocinador(p15);
+        patrocinadorDaoJpa.guardarPatrocinador(p16);
+        patrocinadorDaoJpa.guardarPatrocinador(p17);
+        patrocinadorDaoJpa.guardarPatrocinador(p18);
+        patrocinadorDaoJpa.guardarPatrocinador(p19);
+        patrocinadorDaoJpa.guardarPatrocinador(p20);
+
+        Random random = new Random();
+
+        // Lista de equipos
+        List<Equipo> equipos = Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10);
+
+        // Lista de patrocinadores
+        List<Patrocinador> patrocinadores = Arrays.asList(
+                p1, p2, p3, p4, p5, p6, p7, p8, p9, p10,
+                p11, p12, p13, p14, p15, p16, p17, p18, p19, p20
+        );
+
+        for (Equipo equipo : equipos) {
+            // Número aleatorio de patrocinadores entre 2 y 4
+            int cantidadPatrocinadores = 2 + random.nextInt(3); // random.nextInt(3) -> 0,1,2
+
+            // Asignar patrocinadores aleatorios sin repetir
+            while (equipo.getPatrocinadores().size() < cantidadPatrocinadores) {
+                Patrocinador patrocinador = patrocinadores.get(random.nextInt(patrocinadores.size()));
+                equipo.agregarPatrocinador(patrocinador);
+            }
+        }
         em.getTransaction().commit();
-    }
-
-    public void crearDeportistasConEquipo(){
 
     }
-
 
 }

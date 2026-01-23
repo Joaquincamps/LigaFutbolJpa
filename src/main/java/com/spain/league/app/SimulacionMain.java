@@ -27,10 +27,6 @@ public class SimulacionMain {
             ligaServicio.crearLigaDesdeDatos();
             ligaServicio.crearEquipoConEntrenador();
 
-
-
-
-
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en la entidad.");
