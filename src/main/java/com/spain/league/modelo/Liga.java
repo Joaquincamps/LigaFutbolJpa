@@ -18,9 +18,23 @@ public class Liga {
     @Column(name = "category")
     private String categoria;
 
-    @OneToMany(mappedBy = "liga")
+    @OneToMany(mappedBy = "liga",orphanRemoval = true)
     private Set<Equipo> equipos;
 
+    //metodo helper
+    public void agregarEquipo(Equipo equipo){
+        if(equipo != null){
+            this.equipos.add(equipo);
+            equipo.setLiga(this);
+        }
+    }
+
+    public void eliminarrEquipo(Equipo equipo){
+        if(equipo != null){
+            this.equipos.remove(equipo);
+            equipo.setLiga(null);
+        }
+    }
     public Liga() {
     }
 

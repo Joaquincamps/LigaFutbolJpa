@@ -29,7 +29,8 @@ public class Equipo {
     @Column(name = "points")
     private int puntos;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "liga_id",nullable = false)
     private Liga liga;
 
     @OneToOne(mappedBy = "equipo")

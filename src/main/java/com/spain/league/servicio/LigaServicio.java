@@ -43,6 +43,14 @@ public class LigaServicio {
         ligaDao.crearLiga(liga);
     }
 
+    public LigaDao getLigaDao() {
+        return ligaDao;
+    }
+
+    public void setLigaDao(LigaDao ligaDao) {
+        this.ligaDao = ligaDao;
+    }
+
     public void crearEquipoConEntrenador() {
         em.getTransaction().begin();
         EquipoDaoJpa equipoDaoJpa = new EquipoDaoJpa(em);
@@ -71,6 +79,26 @@ public class LigaServicio {
         Equipo e8 = new Equipo("Athletic Club", "San Mamés", "Bilbao", 19, 28, 24);
         Equipo e9 = new Equipo("Girona FC", "Estadi Montilivi", "Girona", 20, 34, 24);
         Equipo e10 = new Equipo("Elche CF", "Estadio Manuel Martínez Valero", "Elche", 25, 24, 23);
+
+
+
+        Liga liga = new Liga();
+        liga.agregarEquipo(e1);
+        liga.agregarEquipo(e2);
+        liga.agregarEquipo(e3);
+        liga.agregarEquipo(e4);
+        liga.agregarEquipo(e5);
+        liga.agregarEquipo(e6);
+        liga.agregarEquipo(e7);
+        liga.agregarEquipo(e8);
+        liga.agregarEquipo(e9);
+        liga.agregarEquipo(e10);
+
+        ligaDao.agregarEquiposLiga(e1);
+        ligaDao.agregarEquiposLiga(e2);
+
+
+
         e1.asignarEntrenador(t1);
         e2.asignarEntrenador(t2);
         e3.asignarEntrenador(t3);
