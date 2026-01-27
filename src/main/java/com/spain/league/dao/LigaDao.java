@@ -8,4 +8,6 @@ public interface LigaDao {
     void crearLiga(Liga liga);
 
     void agregarEquiposLiga(Equipo equipo);
+
+     void actualizarLiga(Liga liga);
 }

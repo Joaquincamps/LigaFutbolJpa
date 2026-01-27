@@ -24,8 +24,8 @@ public class SimulacionMain {
 
             LigaDaoJpa ligaDaoJpa = new LigaDaoJpa(em);
             LigaServicio ligaServicio = new LigaServicio(ligaDaoJpa);
-            ligaServicio.crearLigaDesdeDatos();
-            ligaServicio.crearEquipoConEntrenador();
+            Liga liga = ligaServicio.crearLigaDesdeDatos();
+            ligaServicio.crearEquipoConEntrenador(liga);
 
             em.getTransaction().commit();
         } catch (Exception e) {

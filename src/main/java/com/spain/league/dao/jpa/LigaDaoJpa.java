@@ -22,4 +22,9 @@ public class LigaDaoJpa implements LigaDao {
     public void agregarEquiposLiga(Equipo equipo) {
         em.persist(equipo);
     }
+
+    @Override
+    public void actualizarLiga(Liga liga) {
+        em.merge(liga);  // merge actualiza la entidad y sus relaciones
+    }
 }

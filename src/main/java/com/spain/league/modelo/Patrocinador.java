@@ -19,7 +19,7 @@ public class Patrocinador {
     private String pais;
 
     @ManyToMany
-    @JoinTable(name = "patrocinador_equipo",
+    @JoinTable(name = "sponsor_team",
     joinColumns = @JoinColumn(name = "patrocinador_id"),
     inverseJoinColumns = @JoinColumn(name = "equipo_id"))
     private Set<Equipo> equipos;

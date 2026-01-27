@@ -38,9 +38,10 @@ public class LigaServicio {
     }
 
 
-    public void crearLigaDesdeDatos() {
+    public Liga crearLigaDesdeDatos() {
         Liga liga = new Liga(nombreLiga, categoria);
         ligaDao.crearLiga(liga);
+        return liga;
     }
 
     public LigaDao getLigaDao() {
@@ -51,15 +52,17 @@ public class LigaServicio {
         this.ligaDao = ligaDao;
     }
 
-    public void crearEquipoConEntrenador() {
+    public void crearEquipoConEntrenador(Liga liga) {
         em.getTransaction().begin();
         EquipoDaoJpa equipoDaoJpa = new EquipoDaoJpa(em);
         EntrenadorDaoJpa entrenadorDaoJpa = new EntrenadorDaoJpa(em);
         DeportistaDaoJpa deportistaDaoJpa = new DeportistaDaoJpa(em);
         PatrocinadorDaoJpa patrocinadorDaoJpa = new PatrocinadorDaoJpa(em);
 
-        Entrenador t1 = new Entrenador("Hansi Flick", "Alemana", null);          // FC Barcelona
-        Entrenador t2 = new Entrenador("Carlo Ancelotti", "Italiana", null);     // Real Madrid
+
+        // Entrenadores
+        Entrenador t1 = new Entrenador("Hansi Flick", "Alemana", null);
+        Entrenador t2 = new Entrenador("Carlo Ancelotti", "Italiana", null);
         Entrenador t3 = new Entrenador("Marcelino García Toral", "Española", null);
         Entrenador t4 = new Entrenador("Diego Simeone", "Argentina", null);
         Entrenador t5 = new Entrenador("Manolo González", "Española", null);
@@ -69,6 +72,7 @@ public class LigaServicio {
         Entrenador t9 = new Entrenador("Míchel Sánchez", "Española", null);
         Entrenador t10 = new Entrenador("Sebastián Beccacece", "Argentina", null);
 
+        // Equipos
         Equipo e1 = new Equipo("FC Barcelona", "Camp Nou", "Barcelona", 53, 20, 49);
         Equipo e2 = new Equipo("Real Madrid", "Santiago Bernabéu", "Madrid", 41, 17, 45);
         Equipo e3 = new Equipo("Villarreal CF", "Estadio de la Cerámica", "Villarreal", 37, 17, 41);
@@ -81,24 +85,7 @@ public class LigaServicio {
         Equipo e10 = new Equipo("Elche CF", "Estadio Manuel Martínez Valero", "Elche", 25, 24, 23);
 
 
-
-        Liga liga = new Liga();
-        liga.agregarEquipo(e1);
-        liga.agregarEquipo(e2);
-        liga.agregarEquipo(e3);
-        liga.agregarEquipo(e4);
-        liga.agregarEquipo(e5);
-        liga.agregarEquipo(e6);
-        liga.agregarEquipo(e7);
-        liga.agregarEquipo(e8);
-        liga.agregarEquipo(e9);
-        liga.agregarEquipo(e10);
-
-        ligaDao.agregarEquiposLiga(e1);
-        ligaDao.agregarEquiposLiga(e2);
-
-
-
+        // Asignar entrenadores a los equipos
         e1.asignarEntrenador(t1);
         e2.asignarEntrenador(t2);
         e3.asignarEntrenador(t3);
@@ -110,6 +97,7 @@ public class LigaServicio {
         e9.asignarEntrenador(t9);
         e10.asignarEntrenador(t10);
 
+        // Guardar entrenadores en base
         entrenadorDaoJpa.agregarEntrenador(t1);
         entrenadorDaoJpa.agregarEntrenador(t2);
         entrenadorDaoJpa.agregarEntrenador(t3);

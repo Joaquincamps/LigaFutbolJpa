@@ -29,9 +29,6 @@ public class Equipo {
     @Column(name = "points")
     private int puntos;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "liga_id",nullable = false)
-    private Liga liga;
 
     @OneToOne(mappedBy = "equipo")
     private Entrenador entrenador;
@@ -169,13 +166,6 @@ public class Equipo {
         this.patrocinadores = patrocinadores;
     }
 
-    public Liga getLiga() {
-        return liga;
-    }
-
-    public void setLiga(Liga liga) {
-        this.liga = liga;
-    }
 
     @Override
     public String toString() {
