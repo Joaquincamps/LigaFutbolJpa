@@ -3,6 +3,7 @@ package com.spain.league.app;
 import com.spain.league.config.JpaUtil;
 import com.spain.league.dao.PatrocinadorDao;
 import com.spain.league.dao.jpa.*;
+import com.spain.league.modelo.Deportista;
 import com.spain.league.modelo.Entrenador;
 import com.spain.league.modelo.Equipo;
 import com.spain.league.modelo.Liga;
@@ -29,8 +30,17 @@ public class SimulacionMain {
             Liga liga = ligaServicio.crearLigaDesdeDatos();
             ligaServicio.crearEquipoConEntrenador(liga);
             List<Liga> listaCompetición = ligaDaoJpa.mostarCaracteristicasLiga();
-            for (Liga league : listaCompetición){
+            System.out.println("1) Características de la competición.");
+            for (Liga league : listaCompetición) {
                 System.out.println(league);
+            }
+
+            System.out.println("3) Lista de los deportistas de un id específico.");
+            DeportistaDaoJpa deportistaDaoJpa = new DeportistaDaoJpa(em);
+            List<Deportista> deportistasPorEquipoEspecifico =
+                    deportistaDaoJpa.listarDeportistas(1);
+            for (Deportista depo : deportistasPorEquipoEspecifico) {
+                System.out.println(depo);
             }
 
             em.getTransaction().commit();

@@ -79,6 +79,7 @@ public class Deportista {
                 ", nombre='" + nombre + '\'' +
                 ", nacionalidad='" + nacionalidad + '\'' +
                 ", edad=" + edad +
+                ", equipo_id=" + equipo.getId() +
                 '}';
     }
 }
