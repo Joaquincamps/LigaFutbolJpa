@@ -4,6 +4,9 @@ import com.spain.league.dao.LigaDao;
 import com.spain.league.modelo.Equipo;
 import com.spain.league.modelo.Liga;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+
+import java.util.List;
 
 public class LigaDaoJpa implements LigaDao {
 
@@ -26,5 +29,11 @@ public class LigaDaoJpa implements LigaDao {
     @Override
     public void actualizarLiga(Liga liga) {
         em.merge(liga);  // merge actualiza la entidad y sus relaciones
+    }
+
+    @Override
+    public List<Liga> mostarCaracteristicasLiga() {
+        Query consulta = em.createNativeQuery("SELECT * FROM League",Liga.class);
+        return consulta.getResultList();
     }
 }

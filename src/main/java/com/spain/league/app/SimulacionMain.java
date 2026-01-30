@@ -10,6 +10,8 @@ import com.spain.league.servicio.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
+import java.util.List;
+
 /**
  * Hello world!
  */
@@ -26,6 +28,10 @@ public class SimulacionMain {
             LigaServicio ligaServicio = new LigaServicio(ligaDaoJpa);
             Liga liga = ligaServicio.crearLigaDesdeDatos();
             ligaServicio.crearEquipoConEntrenador(liga);
+            List<Liga> listaCompetición = ligaDaoJpa.mostarCaracteristicasLiga();
+            for (Liga league : listaCompetición){
+                System.out.println(league);
+            }
 
             em.getTransaction().commit();
         } catch (Exception e) {
