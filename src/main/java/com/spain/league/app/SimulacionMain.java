@@ -3,14 +3,13 @@ package com.spain.league.app;
 import com.spain.league.config.JpaUtil;
 import com.spain.league.dao.PatrocinadorDao;
 import com.spain.league.dao.jpa.*;
-import com.spain.league.modelo.Deportista;
-import com.spain.league.modelo.Entrenador;
-import com.spain.league.modelo.Equipo;
-import com.spain.league.modelo.Liga;
+import com.spain.league.dto.EquipoDto;
+import com.spain.league.modelo.*;
 import com.spain.league.servicio.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +29,9 @@ public class SimulacionMain {
             Liga liga = ligaServicio.crearLigaDesdeDatos();
             ligaServicio.crearEquipoConEntrenador(liga);
             List<Liga> listaCompetición = ligaDaoJpa.mostarCaracteristicasLiga();
+            PatrocinadorDaoJpa patrocinadorDaoJpa = new PatrocinadorDaoJpa(em);
+            EquipoDaoJpa equipoDaoJpa = new EquipoDaoJpa(em);
+
             System.out.println("1) Características de la competición.");
             for (Liga league : listaCompetición) {
                 System.out.println(league);
@@ -42,7 +44,19 @@ public class SimulacionMain {
             for (Deportista depo : deportistasPorEquipoEspecifico) {
                 System.out.println(depo);
             }
+            System.out.println("4) Listar patrocinadores de un equipo concreto.");
+            List<Patrocinador> patrocinadoresPorEquipo = patrocinadorDaoJpa.listarPatrocinadores(3);
+            for (Patrocinador patrocinador : patrocinadoresPorEquipo) {
+                System.out.println(patrocinador);
+            }
 
+            System.out.println("5) Genera lista de deportista y patrocinadores vinculados a un equipo");
+            EquipoDto equipoDto = equipoDaoJpa.listarDeportistasPatrocinadoresPorEquipo(2);
+            System.out.println(equipoDto);
+
+            System.out.println("6) Calcular la media de jugadores por equipo");
+            Double edadMedia = deportistaDaoJpa.calcularEdadPromedioPorEquipo(4);
+            System.out.println(edadMedia);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en la entidad.");

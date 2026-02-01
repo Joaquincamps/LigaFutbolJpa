@@ -28,4 +28,13 @@ public class DeportistaDaoJpa implements DeportistaDao {
         query.setParameter("idEquipo", idEquipo);
         return query.getResultList();
     }
+
+    @Override
+    public double calcularEdadPromedioPorEquipo(int id) {
+        TypedQuery<Double> query = em.createQuery("SELECT AVG(e.edad) FROM athlete e WHERE e.equipo.id =: id",
+                Double.class);
+        query.setParameter("id", (long) id);
+        return query.getSingleResult();
+    }
+
 }
