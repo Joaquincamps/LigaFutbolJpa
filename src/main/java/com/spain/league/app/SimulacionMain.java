@@ -57,6 +57,13 @@ public class SimulacionMain {
             System.out.println("6) Calcular la media de jugadores por equipo");
             Double edadMedia = deportistaDaoJpa.calcularEdadPromedioPorEquipo(4);
             System.out.println(edadMedia);
+
+            System.out.println("7. Cuenta cuantos deportistas tienen más de veintitrés años en la competición agrupados por nacionalidad.");
+            List<Deportista> consulta7 = deportistaDaoJpa.contarDeportistasPorNacionaliaddMayores_23();
+            for (Deportista depo : consulta7) {
+                System.out.println(depo);
+            }
+
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en la entidad.");

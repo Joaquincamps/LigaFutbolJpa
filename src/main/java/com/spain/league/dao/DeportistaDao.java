@@ -11,4 +11,6 @@ public interface DeportistaDao {
     List<Deportista> listarDeportistas (int idEquipo);
 
     double calcularEdadPromedioPorEquipo(int id);
+
+    List<Deportista> contarDeportistasPorNacionaliaddMayores_23();
 }

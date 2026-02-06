@@ -5,6 +5,7 @@ import com.spain.league.modelo.Deportista;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class DeportistaDaoJpa implements DeportistaDao {
@@ -37,4 +38,14 @@ public class DeportistaDaoJpa implements DeportistaDao {
         return query.getSingleResult();
     }
 
+    @Override
+    public List<Deportista> contarDeportistasPorNacionaliaddMayores_23() {
+        TypedQuery<Deportista> query = em.createQuery(
+                "SELECT COUNT(d) FROM athlete d WHERE d.edad > 23 GROUP BY d.nacionaliad",
+                Deportista.class
+        );
+        //USAR DTO
+        return query.getResultList();
+
+    }
 }
