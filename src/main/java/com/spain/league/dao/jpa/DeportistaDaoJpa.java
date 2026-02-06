@@ -1,6 +1,7 @@
 package com.spain.league.dao.jpa;
 
 import com.spain.league.dao.DeportistaDao;
+import com.spain.league.dto.DeportistasPorNacionalidadDTO;
 import com.spain.league.modelo.Deportista;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -37,12 +38,26 @@ public class DeportistaDaoJpa implements DeportistaDao {
         query.setParameter("id", (long) id);
         return query.getSingleResult();
     }
+    /*
+    ✅ USA DTO cuando:
 
+Usas COUNT, SUM, AVG
+
+Usas GROUP BY
+
+Devuelves campos concretos, no la entidad entera
+
+Consultas de tipo reportes / estadísticas
+
+Quieres optimizar rendimiento (menos datos)
+
+👉 Tu caso es 100% DTO ✔️
+     */
     @Override
-    public List<Deportista> contarDeportistasPorNacionaliaddMayores_23() {
-        TypedQuery<Deportista> query = em.createQuery(
-                "SELECT COUNT(d) FROM athlete d WHERE d.edad > 23 GROUP BY d.nacionaliad",
-                Deportista.class
+    public List<DeportistasPorNacionalidadDTO> DeportistasPorNacionaliaddMayores_23() {
+        TypedQuery<DeportistasPorNacionalidadDTO> query = em.createQuery(
+                "SELECT NEW com.spain.league.dto.DeportistasPorNacionalidadDTO (d.nacionalidad, count(d)) FROM athlete d WHERE d.edad > 23 GROUP BY d.nacionalidad",
+                DeportistasPorNacionalidadDTO.class
         );
         //USAR DTO
         return query.getResultList();

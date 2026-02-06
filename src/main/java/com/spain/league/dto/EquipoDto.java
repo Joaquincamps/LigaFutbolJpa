@@ -11,12 +11,19 @@ public class EquipoDto {
     private String nombreEquipo;
     private Set<Deportista> deportistas;
     private Set<Patrocinador> patrocinadores;
+    private int puntos;
 
     public EquipoDto(Long idEquipo, String nombreEquipo, Set<Deportista> deportistas, Set<Patrocinador> patrocinadores) {
         this.idEquipo = idEquipo;
         this.nombreEquipo = nombreEquipo;
         this.deportistas = deportistas;
         this.patrocinadores = patrocinadores;
+    }
+
+    public EquipoDto(Long idEquipo, String nombreEquipo, int puntoas) {
+        this.idEquipo = idEquipo;
+        this.nombreEquipo = nombreEquipo;
+        this.puntos = puntoas;
     }
 
     public EquipoDto() {

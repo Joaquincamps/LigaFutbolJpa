@@ -18,8 +18,6 @@ public class Liga {
     @Column(name = "category")
     private String categoria;
 
-
-
     public Liga() {
     }
 
