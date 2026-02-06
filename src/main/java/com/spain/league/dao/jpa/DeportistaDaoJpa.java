@@ -38,6 +38,7 @@ public class DeportistaDaoJpa implements DeportistaDao {
         query.setParameter("id", (long) id);
         return query.getSingleResult();
     }
+
     /*
     ✅ USA DTO cuando:
 
@@ -62,5 +63,12 @@ Quieres optimizar rendimiento (menos datos)
         //USAR DTO
         return query.getResultList();
 
+    }
+
+    @Override
+    public List<Deportista> listarFichajes() {
+        TypedQuery<Deportista> query = em.createNamedQuery("seleccionarFichajes", Deportista.class);
+        query.setParameter("esFichado", true);
+        return query.getResultList();
     }
 }

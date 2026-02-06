@@ -3,6 +3,9 @@ package com.spain.league.modelo;
 import jakarta.persistence.*;
 
 @Entity(name = "athlete")
+@NamedQuery(
+        name = "seleccionarFichajes", query = "SELECT d FROM athlete d WHERE d.esFichado =:esFichado"
+)
 public class Deportista {
 
     @Id
@@ -18,18 +21,22 @@ public class Deportista {
     @Column(name = "age")
     private int edad;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "equipo_id")
     private Equipo equipo;
+
+    @Column(name = "signed")
+    private boolean esFichado;
 
     public Deportista() {
     }
 
-    public Deportista(String nombre, String nacionalidad, int edad,Equipo equipo) {
+    public Deportista(String nombre, String nacionalidad, int edad, Equipo equipo) {
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;
         this.edad = edad;
         this.equipo = equipo;
+        this.esFichado = false;
     }
 
     public Long getId() {
@@ -72,6 +79,14 @@ public class Deportista {
         this.equipo = equipo;
     }
 
+    public boolean isEsFichado() {
+        return esFichado;
+    }
+
+    public void setEsFichado(boolean esFichado) {
+        this.esFichado = esFichado;
+    }
+
     @Override
     public String toString() {
         return "Deportista{" +
@@ -79,7 +94,10 @@ public class Deportista {
                 ", nombre='" + nombre + '\'' +
                 ", nacionalidad='" + nacionalidad + '\'' +
                 ", edad=" + edad +
-                ", equipo_id=" + equipo.getId() +
+                ", id_equipo=" + (equipo != null ? equipo.getId() : "SIN EQUIPO") +
+                ", esFichado=" + esFichado +
                 '}';
     }
+
+
 }

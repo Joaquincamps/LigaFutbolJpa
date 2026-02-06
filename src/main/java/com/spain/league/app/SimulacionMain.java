@@ -61,31 +61,38 @@ public class SimulacionMain {
 
             System.out.println("7. Cuenta cuantos deportistas tienen más de veintitrés años en la competición agrupados por nacionalidad.");
             List<DeportistasPorNacionalidadDTO> listaConsulta7 = deportistaDaoJpa.DeportistasPorNacionaliaddMayores_23();
-            for(DeportistasPorNacionalidadDTO deportistasPorNacionalidadDTO : listaConsulta7){
+            for (DeportistasPorNacionalidadDTO deportistasPorNacionalidadDTO : listaConsulta7) {
                 System.out.println(deportistasPorNacionalidadDTO);
             }
 
             System.out.println("8) Visualiza la clasificación al inicio, a mitad de temporada y al final de esta.");
             List<Equipo> listaConsulta8 = equipoDaoJpa.visualizarClasificacion();
-            for(Equipo consulta8 : listaConsulta8){
+            for (Equipo consulta8 : listaConsulta8) {
                 System.out.println(consulta8);
             }
 
             System.out.println("9) Determina y muestra los tres equipos con más puntos y los tres con menos.");
             List<EquipoDto> listaConsulta9 = equipoDaoJpa.mostrarEquiposPorOrdenPreferente();
-            for(EquipoDto equipoDto1 : listaConsulta9){
+            for (EquipoDto equipoDto1 : listaConsulta9) {
                 System.out.println(equipoDto1);
+            }
+
+            System.out.println("10) Muestra las nuevas incorporaciones a la competición");
+            RealizaFichajes.realizarFichajes(em);
+            List<Deportista> consulta10 = deportistaDaoJpa.listarFichajes();
+            for (Deportista deportista : consulta10) {
+                System.out.println(deportista);
             }
 
             System.out.println("12) Realiza un recuento del total de deportistas que participan en la competición.");
             Long consulta12 = equipoDaoJpa.contarJugadoresComp();
-            System.out.println("El número de participantes es:"+consulta12);
+            System.out.println("El número de participantes es:" + consulta12);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en la entidad.");
         } finally {
-            emf.close();
             em.close();
+            emf.close();
         }
     }
 }

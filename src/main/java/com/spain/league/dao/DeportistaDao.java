@@ -9,9 +9,11 @@ public interface DeportistaDao {
 
     void crearDeportista(Deportista deportista);
 
-    List<Deportista> listarDeportistas (int idEquipo);
+    List<Deportista> listarDeportistas(int idEquipo);
 
     double calcularEdadPromedioPorEquipo(int id);
 
     List<DeportistasPorNacionalidadDTO> DeportistasPorNacionaliaddMayores_23();
+
+    List<Deportista> listarFichajes();
 }
