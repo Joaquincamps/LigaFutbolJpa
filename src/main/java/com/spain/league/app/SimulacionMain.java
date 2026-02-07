@@ -65,15 +65,20 @@ public class SimulacionMain {
                 System.out.println(deportistasPorNacionalidadDTO);
             }
 
-            System.out.println("8) Visualiza la clasificación al inicio, a mitad de temporada y al final de esta.");
+            System.out.println("2 y 8) Visualiza la clasificación al inicio, a mitad de temporada y al final de esta.");
             List<Equipo> listaConsulta8 = equipoDaoJpa.visualizarClasificacion();
             for (Equipo consulta8 : listaConsulta8) {
                 System.out.println(consulta8);
             }
 
             System.out.println("9) Determina y muestra los tres equipos con más puntos y los tres con menos.");
-            List<EquipoDto> listaConsulta9 = equipoDaoJpa.mostrarEquiposPorOrdenPreferente();
+            List<EquipoDto> listaConsulta9 = equipoDaoJpa.mostrarEquiposPorOrdenDesc();
             for (EquipoDto equipoDto1 : listaConsulta9) {
+                System.out.println(equipoDto1);
+            }
+
+            List<EquipoDto> listaConsulta9_B = equipoDaoJpa.mostrarEquiposPorOrdenAsc();
+            for (EquipoDto equipoDto1 : listaConsulta9_B) {
                 System.out.println(equipoDto1);
             }
 
@@ -87,6 +92,28 @@ public class SimulacionMain {
             System.out.println("12) Realiza un recuento del total de deportistas que participan en la competición.");
             Long consulta12 = equipoDaoJpa.contarJugadoresComp();
             System.out.println("El número de participantes es:" + consulta12);
+
+            System.out.println("13) Dado dos equipos muestra sus patrocinadores comunes.");
+            List<Patrocinador> consulta13 = patrocinadorDaoJpa.listarPatrocinadoresPorDosEquipos(1, 2);
+            for (Patrocinador patrocinador : consulta13) {
+                System.out.println(patrocinador);
+            }
+
+            System.out.println("14) Consultas usando Criteri Query");
+            List<Deportista> consulta14_A = deportistaDaoJpa.criteriaQueryNum1();
+            for (Deportista deportista : consulta14_A) {
+                System.out.println(deportista);
+            }
+            System.out.println("-------------------------");
+            List<Deportista> consulta14_B = deportistaDaoJpa.criteriaQueryNum2();
+            for (Deportista deportista : consulta14_B) {
+                System.out.println(deportista);
+            }
+            System.out.println("-------------------------");
+            List<Deportista> consulta14_C = deportistaDaoJpa.criteriaQueryNum3();
+            for (Deportista deportista : consulta14_C) {
+                System.out.println(deportista);
+            }
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en la entidad.");

@@ -5,6 +5,9 @@ import com.spain.league.dto.DeportistasPorNacionalidadDTO;
 import com.spain.league.modelo.Deportista;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -69,6 +72,39 @@ Quieres optimizar rendimiento (menos datos)
     public List<Deportista> listarFichajes() {
         TypedQuery<Deportista> query = em.createNamedQuery("seleccionarFichajes", Deportista.class);
         query.setParameter("esFichado", true);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Deportista> criteriaQueryNum1() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Deportista> cq = cb.createQuery(Deportista.class);
+        Root<Deportista> d = cq.from(Deportista.class);
+
+        cq.select(d).where(cb.equal(d.get("nacionalidad"), "Argentina"));
+        TypedQuery<Deportista> query = em.createQuery(cq);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Deportista> criteriaQueryNum2() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Deportista> cq = cb.createQuery(Deportista.class);
+        Root<Deportista> d = cq.from(Deportista.class);
+
+        cq.select(d).where(cb.le(d.get("edad"), 23));
+        TypedQuery<Deportista> query = em.createQuery(cq);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Deportista> criteriaQueryNum3() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Deportista> cq = cb.createQuery(Deportista.class);
+        Root<Deportista> d = cq.from(Deportista.class);
+
+        cq.select(d).where(cb.le(d.get("edad"), 20)).orderBy(cb.asc(d.get("nombre")));
+        TypedQuery<Deportista> query = em.createQuery(cq);
         return query.getResultList();
     }
 }

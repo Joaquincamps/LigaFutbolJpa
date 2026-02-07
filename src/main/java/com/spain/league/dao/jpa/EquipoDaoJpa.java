@@ -43,8 +43,14 @@ public class EquipoDaoJpa implements EquipoDao {
     }
 
     @Override
-    public List<EquipoDto> mostrarEquiposPorOrdenPreferente() {
+    public List<EquipoDto> mostrarEquiposPorOrdenDesc() {
         TypedQuery<EquipoDto> query = em.createQuery("SELECT new com.spain.league.dto.EquipoDto(e.id,e.nombre,e.puntos) FROM team e ORDER BY e.puntos DESC LIMIT 3",EquipoDto.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<EquipoDto> mostrarEquiposPorOrdenAsc() {
+        TypedQuery<EquipoDto> query = em.createQuery("SELECT new com.spain.league.dto.EquipoDto(e.id,e.nombre,e.puntos) FROM team e ORDER BY e.puntos ASC LIMIT 3",EquipoDto.class);
         return query.getResultList();
     }
 

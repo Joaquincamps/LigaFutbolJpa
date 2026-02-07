@@ -11,7 +11,9 @@ public interface EquipoDao {
 
     EquipoDto listarDeportistasPatrocinadoresPorEquipo(int id);
 
-    List<EquipoDto> mostrarEquiposPorOrdenPreferente();
+    List<EquipoDto> mostrarEquiposPorOrdenDesc();
+
+    List<EquipoDto> mostrarEquiposPorOrdenAsc();
 
     List<Equipo> visualizarClasificacion();
 

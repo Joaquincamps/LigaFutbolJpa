@@ -16,4 +16,11 @@ public interface DeportistaDao {
     List<DeportistasPorNacionalidadDTO> DeportistasPorNacionaliaddMayores_23();
 
     List<Deportista> listarFichajes();
+
+    List<Deportista> criteriaQueryNum1();
+
+    List<Deportista> criteriaQueryNum2();
+
+    List<Deportista> criteriaQueryNum3();
+
 }

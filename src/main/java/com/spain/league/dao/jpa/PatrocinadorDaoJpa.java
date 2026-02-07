@@ -1,6 +1,7 @@
 package com.spain.league.dao.jpa;
 
 import com.spain.league.dao.PatrocinadorDao;
+import com.spain.league.modelo.Equipo;
 import com.spain.league.modelo.Patrocinador;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -30,6 +31,16 @@ public class PatrocinadorDaoJpa implements PatrocinadorDao {
         );
         query.setParameter("id", (long) id);
 
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Patrocinador> listarPatrocinadoresPorDosEquipos(int idEquipo1, int idEquipo2) {
+        TypedQuery<Patrocinador> query = em.createQuery(
+                "SELECT DISTINCT p FROM sponsor p JOIN p.equipos e WHERE e.id =:idEquipo1 OR e.id =:idEquipo2 GROUP BY p " +
+                        "HAVING COUNT(e) = 2"
+                , Patrocinador.class);
+        query.setParameter("idEquipo1", idEquipo1).setParameter("idEquipo2", idEquipo2);
         return query.getResultList();
     }
 }
